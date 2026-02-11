@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Verification - TRACE 360</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #E8F5E9 0%, #F5F5F5 100%);
+            min-height: 100vh;
+            padding: 1rem;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2C5F2D 0%, #1A3A1B 100%);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .verified-badge {
+            background: white;
+            color: #2C5F2D;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .product-title {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .batch-id {
+            opacity: 0.9;
+            font-size: 0.95rem;
+        }
+
+        .content {
+            padding: 2rem;
+        }
+
+        .info-card {
+            background: #F7FAFC;
+            border-left: 4px solid #2C5F2D;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+        }
+
+        .info-card h3 {
+            color: #2C5F2D;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #E2E8F0;
+        }
+
+        .info-row:last-child {
+            border-bottom: none;
+        }
+
+        .info-label {
+            color: #718096;
+            font-weight: 500;
+        }
+
+        .info-value {
+            color: #2D3748;
+            font-weight: bold;
+            text-align: right;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-bottom: 2rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2rem;
+            top: 0;
+            width: 12px;
+            height: 12px;
+            background: #2C5F2D;
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 0 0 2px #2C5F2D;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            left: -1.56rem;
+            top: 12px;
+            width: 2px;
+            height: calc(100% - 12px);
+            background: #97BC62;
+        }
+
+        .timeline-item:last-child::after {
+            display: none;
+        }
+
+        .timeline-date {
+            font-size: 0.85rem;
+            color: #718096;
+            margin-bottom: 0.25rem;
+        }
+
+        .timeline-title {
+            font-weight: bold;
+            color: #2C5F2D;
+            margin-bottom: 0.25rem;
+        }
+
+        .timeline-desc {
+            font-size: 0.9rem;
+            color: #718096;
+        }
+
+        .sustainability-badges {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+
+        .badge {
+            background: #E8F5E9;
+            color: #2C5F2D;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .map-placeholder {
+            background: #E2E8F0;
+            height: 200px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #718096;
+            font-size: 3rem;
+            margin: 1rem 0;
+        }
+
+        .footer {
+            background: #F7FAFC;
+            padding: 1.5rem 2rem;
+            text-align: center;
+            color: #718096;
+            font-size: 0.9rem;
+        }
+
+        .footer-logo {
+            color: #2C5F2D;
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .container {
+            animation: fadeIn 0.6s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="verified-badge">
+                <span style="font-size: 1.3rem;">✓</span>
+                TRACE 360 Verified
+            </div>
+            <h1 class="product-title">Premium Basmati Rice</h1>
+            <p class="batch-id">Batch ID: BR-2026-001</p>
+        </div>
+
+        <div class="content">
+            <!-- Farm Information -->
+            <div class="info-card">
+                <h3>🌾 Farm Information</h3>
+                <div class="info-row">
+                    <span class="info-label">Farmer Name</span>
+                    <span class="info-value">Ahmad Hassan</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Farm Location</span>
+                    <span class="info-value">Okara, Punjab, Pakistan</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Farm Size</span>
+                    <span class="info-value">5 acres</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Farming Method</span>
+                    <span class="info-value">Sustainable</span>
+                </div>
+            </div>
+
+            <!-- Farm Location Map -->
+            <div class="map-placeholder">
+                📍
+                <div style="margin-left: 1rem; font-size: 1rem;">
+                    Okara District, Punjab
+                </div>
+            </div>
+
+            <!-- Product Details -->
+            <div class="info-card">
+                <h3>📦 Product Details</h3>
+                <div class="info-row">
+                    <span class="info-label">Crop Type</span>
+                    <span class="info-value">Basmati Rice (Super Kernel)</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Quantity</span>
+                    <span class="info-value">500 kg</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Harvest Date</span>
+                    <span class="info-value">January 15, 2026</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Quality Grade</span>
+                    <span class="info-value">Premium A+</span>
+                </div>
+            </div>
+
+            <!-- Agricultural Practices -->
+            <div class="info-card">
+                <h3>🌱 Agricultural Practices</h3>
+                <div class="info-row">
+                    <span class="info-label">Fertilizer Used</span>
+                    <span class="info-value">Organic Compost</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Pesticide Used</span>
+                    <span class="info-value">Organic Neem Oil</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Irrigation</span>
+                    <span class="info-value">Drip Irrigation</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Water Source</span>
+                    <span class="info-value">Canal + Groundwater</span>
+                </div>
+
+                <div class="sustainability-badges">
+                    <span class="badge">✓ Low Pesticide</span>
+                    <span class="badge">✓ Water Efficient</span>
+                    <span class="badge">✓ Organic Fertilizer</span>
+                    <span class="badge">✓ Sustainable</span>
+                </div>
+            </div>
+
+            <!-- Journey Timeline -->
+            <div class="info-card">
+                <h3>🛣️ Product Journey</h3>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-date">November 10, 2025</div>
+                        <div class="timeline-title">Planting</div>
+                        <div class="timeline-desc">Basmati rice seeds planted in prepared field</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">December 15, 2025</div>
+                        <div class="timeline-title">Growth Monitoring</div>
+                        <div class="timeline-desc">Crop health verified, organic fertilizer applied</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">January 15, 2026</div>
+                        <div class="timeline-title">Harvest</div>
+                        <div class="timeline-desc">Premium A+ grade rice harvested at optimal maturity</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">January 18, 2026</div>
+                        <div class="timeline-title">Quality Check</div>
+                        <div class="timeline-desc">Passed all quality and safety inspections</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">January 20, 2026</div>
+                        <div class="timeline-title">TRACE 360 Verification</div>
+                        <div class="timeline-desc">Product verified and QR code generated</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Certifications -->
+            <div class="info-card">
+                <h3>🏆 Certifications & Standards</h3>
+                <div class="sustainability-badges">
+                    <span class="badge">✓ TRACE 360 Verified</span>
+                    <span class="badge">✓ Food Safety Compliant</span>
+                    <span class="badge">✓ Export Quality</span>
+                    <span class="badge">✓ Traceable Origin</span>
+                </div>
+            </div>
+
+            <!-- Trust Indicators -->
+            <div style="
+                background: linear-gradient(135deg, #E8F5E9 0%, #F5F5F5 100%);
+                padding: 1.5rem;
+                border-radius: 12px;
+                margin-top: 1.5rem;
+                text-align: center;
+            ">
+                <div style="font-size: 3rem; margin-bottom: 0.5rem;">🔒</div>
+                <h3 style="color: #2C5F2D; margin-bottom: 0.5rem;">100% Authentic</h3>
+                <p style="color: #718096; font-size: 0.9rem;">
+                    This product has been verified through TRACE 360 Pakistan's 
+                    blockchain-secured traceability system. All data is immutable 
+                    and independently verified.
+                </p>
+            </div>
+        </div>
+
+        <div class="footer">
+            <div class="footer-logo">🌾 TRACE 360</div>
+            <p>Building trust from seed to shelf</p>
+            <p style="margin-top: 0.5rem; font-size: 0.85rem;">
+                Verified on: February 9, 2026
+            </p>
+        </div>
+    </div>
+</body>
+</html>
